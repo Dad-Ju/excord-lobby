@@ -1,3 +1,4 @@
 main: "excord.dad_ju.lobby.PluginEntry"
 version: "1.0"
+api-version: 1.16
 name: "Excord-LobbySystem"

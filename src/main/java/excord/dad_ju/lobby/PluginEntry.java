@@ -1,5 +1,6 @@
 package excord.dad_ju.lobby;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -15,16 +16,22 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class PluginEntry extends JavaPlugin {
 
+    public static String prefix = "§c[§aLOBBY§c]§r ";
+
     @Override
     public void onEnable() {
         // Copy the config.yml in the plugin configuration folder if it doesn't exists.
         this.saveDefaultConfig();
-        // TODO : Do something if your plugin needs it (registering commands / listeners)
+        log("Plugin Started!");
     }
 
     @Override
     public void onDisable() {
-        // TODO : Do something if your plugin needs it (saving custom configs, clearing cache, closing connections...)
+        log("Plugin Stopped!");
     }
 
+
+    public void log(String text) {
+        Bukkit.getConsoleSender().sendMessage(prefix + text);
+    }
 }
