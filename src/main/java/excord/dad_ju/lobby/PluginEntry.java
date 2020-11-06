@@ -1,7 +1,12 @@
 package excord.dad_ju.lobby;
 
+import excord.dad_ju.lobby.commands.SpawnCommand;
+import excord.dad_ju.lobby.events.JoinEvent;
+import excord.dad_ju.lobby.events.PlayerRelatedEvents;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Objects;
 
 /**
  * Entry point for the template plugin. You should edit
@@ -15,12 +20,21 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @since 1.0-SNAPSHOT
  */
 public class PluginEntry extends JavaPlugin {
+    public static PluginEntry INSTANCE;
+    public static JavaPlugin plugin;
 
     public static String prefix = "§c[§aLOBBY§c]§r ";
 
+    public PluginEntry() {
+        INSTANCE = this;
+    }
+
     @Override
     public void onEnable() {
-        // Copy the config.yml in the plugin configuration folder if it doesn't exists.
+        plugin = this;
+        registerCommands();
+        new PlayerRelatedEvents(this);
+        new JoinEvent(this);
         this.saveDefaultConfig();
         log("Plugin Started!");
     }
@@ -31,7 +45,11 @@ public class PluginEntry extends JavaPlugin {
     }
 
 
-    public void log(String text) {
+    public static void log(String text) {
         Bukkit.getConsoleSender().sendMessage(prefix + text);
+    }
+
+    public static void registerCommands() {
+        Objects.requireNonNull(Bukkit.getPluginCommand("spawn")).setExecutor(new SpawnCommand());
     }
 }

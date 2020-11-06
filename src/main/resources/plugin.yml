@@ -2,3 +2,19 @@ main: "excord.dad_ju.lobby.PluginEntry"
 version: "1.0"
 api-version: 1.16
 name: "Excord-LobbySystem"
+
+commands:
+  spawn:
+    aliases:
+      - setspawn
+    description: "Here is some Description"
+
+permissions:
+  excord.spawn:
+    default: true
+    description: "Can teleport to the Spawn!"
+  excord.spawn.set:
+    default: op
+    description: "Can Change The spawn Position!"
+    children:
+      - "excord.spawn"
